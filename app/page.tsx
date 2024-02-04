@@ -1,18 +1,21 @@
-import Image from "next/image";
+"use client";
+import React, { useState, useEffect, SVGProps } from 'react';
+import Image from 'next/image';
 import Link from "next/link";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
-import { JSX, SVGProps } from "react";
 
 export default function Component() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
+
+  const images = ['/pic1.jpeg', '/pic2.jpeg', '/pic3.jpeg']; // Add your images here
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000); // Change image every 5 seconds
+  
+    return () => clearInterval(intervalId);
+  }, []); 
+
   
   return (
     <div className="bg-white">
@@ -50,21 +53,72 @@ export default function Component() {
         </div>
       </nav>
       <header className="relative">
-        <img alt="Our Fleet" className="w-full h-[50vh] object-cover" src="pic1.jpeg" />
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <h1 className="text-white text-6xl font-bold">Our Fleet</h1>
-        </div>
-        
+  <img alt="Our Fleet" className="w-1/2 h-[50vh]  mx-auto" src="pic1.jpeg" />
+  <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <h1 className="text-white text-6xl font-bold">Our Fleet</h1> 
+  </div>
 
-      </header>
+  <Image src={images[currentImage]} alt="Our Fleet" layout="fill" objectFit="cover" className="w-1/2 mx-auto" />
+  {/* ... */}
+</header>
       <main className="max-w-7xl mx-auto px-4 py-8">
         <p className="text-gray-600">
-          ALS initially started operations with One Cessna-150; and over the years has seen steady growth. The company
-          has developed a large network of international operations, and has built a reputation for excellence in
-          safety, operational reliability, engineering and maintenance, and customer service. Today, our fleet includes
-          the following aircraft:
+          Urban Logistics, based in Kenya, is a leading provider of logistics and trucking services. We started our journey with a single truck, and over the years, we have grown into a large network of operations, both locally and internationally. Our reputation for excellence is built on our commitment to safety, operational reliability, top-notch engineering and maintenance, and unparalleled customer service. Today, our fleet includes a diverse range of vehicles, all equipped to meet your logistics needs.
+           At Urban Logistics, we empower our clients to focus on their core business while we handle the road ahead.
+
         </p>
+       
       </main>
+      <main className="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row">
+  <div className="md:w-1/2">
+    <div className="flex flex-col justify-center items-center m-auto p-12 space-y-8">
+
+  <div className="lg:pr-8 lg:pt-4 space-y-4">
+    <h2 className="text-4xl text-black font-semibold leading-7">
+      Your logistics partner
+    </h2>
+    <p className="text-black mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+      What We Offer
+    </p>
+    <p className="text-black mt-6 max-w-xl text-lg leading-8">
+      Our dispatch services are designed to empower you, allowing you to
+      focus solely on the road ahead.
+    </p>
+
+    <dl className="space-y-2">
+      <dt className='text-black font-bold'>
+        Effortless Load Management:
+      </dt>
+      <dd className="text-black">
+        We handle the tedious task of finding, coordinating, and
+        tracking loads for you.
+      </dd>
+      <dt className='text-black font-bold'>
+        Tailored Trip Planning:
+      </dt>
+      <dd className="text-black">
+        Our custom trip planning ensures every journey is optimized for
+        efficiency, safety, and revenue.
+      </dd>
+     
+      <dt className='text-black font-bold'>
+        Streamlined Operations:
+      </dt>
+      <dd className="text-black">
+        From invoicing to paperwork, we take care of it all. Focus on
+        driving, while we manage the logistics.
+      </dd>
+      
+    </dl>
+  </div>
+</div>
+    
+  </div>
+  <div className="md:w-1/2 mt-8 md:mt-0">
+    <img src="pic1.jpeg" alt="Truck" className="w-full h-auto mx-auto" />
+  </div>
+</main>
+      
     </div>
   )
 }
@@ -87,4 +141,6 @@ function SearchIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
       <path d="m21 21-4.3-4.3" />
     </svg>
   )
+  
+
 }
