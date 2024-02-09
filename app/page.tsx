@@ -2,6 +2,7 @@
 import React, { useState, useEffect, SVGProps } from 'react';
 import Image from 'next/image';
 import Link from "next/link";
+import { Fleet } from '../components/component';
 
 export default function Component() {
 
@@ -24,24 +25,21 @@ export default function Component() {
           <div className="flex items-center">
             <img alt="RLS Logo" className="h-10" src="/placeholder.svg" />
             <div className="ml-10 space-x-4">
-              <Link className="text-gray-500 hover:text-gray-900" href="#">
+              <Link className="text-gray-500 hover:text-gray-900" href="/about">
                 Home
               </Link>
               <Link className="text-gray-500 hover:text-gray-900" href="#">
                 About Us
               </Link>
-              <Link className="text-blue-600 font-semibold" href="#">
+              <Link className="text-blue-600 font-semibold" href="/fleet">
                 Our Fleet
               </Link>
-              <Link className="text-gray-500 hover:text-gray-900" href="#">
+   
+              <Link className="text-gray-500 hover:text-gray-900" href="/services">
                 Our Services
               </Link>
-              <Link className="text-gray-500 hover:text-gray-900" href="#">
-                Our Reach
-              </Link>
-              <Link className="text-gray-500 hover:text-gray-900" href="#">
-                Our Gallery
-              </Link>
+             
+             
               <Link className="text-gray-500 hover:text-gray-900" href="#">
                 Contact
               </Link>
