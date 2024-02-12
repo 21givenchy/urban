@@ -19,11 +19,11 @@ export default function Component() {
 
   
   return (
-    <div className="bg-white">
-      <nav className="bg-white border-b py-4">
+    <div className=" bg-white">
+      <nav className="flex justify-between items-center bg-white border-b py-4">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center">
-            <img alt="RLS Logo" className="h-10" src="/placeholder.svg" />
+            <img alt="RLS Logo" className="h-10" src="/uss.jpg" />
             <div className="ml-10 space-x-4">
               <Link className="text-gray-500 hover:text-gray-900" href="/about">
                 Home
@@ -40,7 +40,7 @@ export default function Component() {
               </Link>
              
              
-              <Link className="text-gray-500 hover:text-gray-900" href="#">
+              <Link className="text-gray-500 hover:text-gray-900" href="/contact">
                 Contact
               </Link>
             </div>
@@ -56,7 +56,7 @@ export default function Component() {
     <h1 className="text-white text-6xl font-bold">Our Fleet</h1> 
   </div>
 
-  <Image src={images[currentImage]} alt="Our Fleet" layout="fill" objectFit="cover" className="w-1/2 mx-auto" />
+  <Image src={images[currentImage]} alt="Our Fleet" layout="fill" objectFit="cover" className="h-3/w-1/2 mx-auto" />
   {/* ... */}
 </header>
       <main className="max-w-7xl mx-auto px-4 py-8">
