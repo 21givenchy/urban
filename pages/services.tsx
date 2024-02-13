@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function Services() {
-  const [selectedService, setSelectedService] = useState(null);
+  const [selectedService, setSelectedService] = useState<number | null>(null);
 
   const services = [
     {

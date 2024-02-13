@@ -2,6 +2,7 @@ import React from 'react';
 
 export default function About() {
   return (
+    
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <h1 className="text-2xl font-bold mb-2">About Us</h1>
       <p className="mb-4 text-center">We are a leading provider of trucking and logistics services in Kenya. Our mission is to provide safe, reliable, and efficient transportation solutions to our customers.</p>
