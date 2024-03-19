@@ -1,6 +1,7 @@
 // components/Footer.tsx
 
 import React from 'react';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -9,12 +10,12 @@ const Footer = () => {
       <div className="text-center">2024 Urban Logistics</div>
 
       <div className="mt-8 flex justify-center space-x-6">
-        <a 
+        <Link
           href="/maintenance"
           className="text-gray-400 hover:text-white transition"
         >
           Maintenance
-        </a>
+        </Link>
 
         <a
           href="/tracking"
