@@ -17,32 +17,32 @@ const Footer = () => {
           Maintenance
         </Link>
 
-        <a
+        <Link
           href="/tracking"
           className="text-gray-400 hover:text-white transition"
         >
           Tracking
-        </a>
+        </Link>
         
-        <a
+        <Link
           href="/email"
           className="text-gray-400 hover:text-white transition"
         >
           Email
-        </a>
+        </Link>
 
-        <a 
+        <Link
           href="/invoices"
           className="text-gray-400 hover:text-white transition"
         >
           Invoices
-        </a>
-        <a
+        </Link>
+        <Link
   href="/InvoiceGenerator"
   className="text-gray-400 hover:text-white transition"
 >
   Invoice Generator
-</a>
+</Link>
       </div>
     </div>
     </footer>
