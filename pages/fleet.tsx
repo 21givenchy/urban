@@ -1,8 +1,19 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Fleet() {
+ 
   return (
           <main className="flex flex-col md:flex-row">
+            
+  <img alt="Our Fleet" className="w-1/2 h-full mx-auto" src="pic1.jpeg" />
+  <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <h1 className="text-white text-4xl font-bold">Our Fleet</h1> 
+  </div>
+
+  
+
         <section className="flex-1 p-8">
           <h1 className="text-4xl font-bold mb-6">Embraer ERJ145</h1>
           <p className="mb-4">
@@ -22,19 +33,8 @@ export default function Fleet() {
             characteristics and improved cruise performance in high ambient temperatures.
           </p>
         </section>
-        <section className="flex-1">
-          <img
-            alt="Embraer ERJ145"
-            height="530"
-            
-            src="/pic1.jpeg"
-            style={{
-              aspectRatio: "1223/530",
-              objectFit: "cover",
-            }}
-            width="1223"
-          />
-        </section>
+       
+
       </main>
   );
 }

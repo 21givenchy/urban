@@ -36,6 +36,12 @@ const Footer = () => {
         >
           Invoices
         </a>
+        <a
+  href="/InvoiceGenerator"
+  className="text-gray-400 hover:text-white transition"
+>
+  Invoice Generator
+</a>
       </div>
     </div>
     </footer>
