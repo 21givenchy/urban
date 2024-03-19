@@ -51,7 +51,7 @@ export default function Component() {
         </div>
       </nav>
       <header className="relative">
-  <img alt="Our Fleet" className="w-1/2 h-[50vh]  mx-auto" src="pic1.jpeg" />
+  <Image alt="Our Fleet" className="w-1/2 h-[50vh]  mx-auto" src="pic1.jpeg" />
   <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
     <h1 className="text-white text-6xl font-bold">Our Fleet</h1> 
   </div>
