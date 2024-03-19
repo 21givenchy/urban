@@ -10,14 +10,13 @@ export default function Component() {
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // Change image every 5 seconds
-  
-    return () => clearInterval(intervalId);
-  }, []); 
+  const intervalId = setInterval(() => {
+    setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
+  }, 5000); // Change image every 5 seconds
 
-  
+  return () => clearInterval(intervalId);
+}, []); 
+ 
   return (
     <div className=" bg-white">
       <nav className="flex justify-between items-center bg-white border-b py-4">
