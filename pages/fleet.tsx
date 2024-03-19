@@ -7,7 +7,7 @@ export default function Fleet() {
   return (
           <main className="flex flex-col md:flex-row">
             
-  <img alt="Our Fleet" className="w-1/2 h-full mx-auto" src="pic1.jpeg" />
+  <Image alt="Our Fleet" className="w-1/2 h-full mx-auto" src="pic1.jpeg" />
   <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
     <h1 className="text-white text-4xl font-bold">Our Fleet</h1> 
   </div>
