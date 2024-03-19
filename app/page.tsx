@@ -9,14 +9,6 @@ export default function Component() {
   const images = ['/pic1.jpeg', '/pic2.jpeg', '/pic3.jpeg']; // Add your images here
   const [currentImage, setCurrentImage] = useState(0);
 
-  useEffect(() => {
-  const intervalId = setInterval(() => {
-    setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
-  }, 5000); // Change image every 5 seconds
-
-  return () => clearInterval(intervalId);
-}, []); 
- 
   return (
     <div className=" bg-white">
       <nav className="flex justify-between items-center bg-white border-b py-4">
