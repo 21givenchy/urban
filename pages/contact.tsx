@@ -1,36 +1,104 @@
-import React from 'react';
 
-export default function Contact() {
+import React, { useState, useEffect } from 'react';
+
+interface Task {
+  service: string;
+  date: string;
+  notes: string;
+  completed: boolean;
+}
+
+const services = [
+  "Air Filter Replacement",
+  "Alternator Replacement",
+  "Ball Joint Replacement",
+  "Tire Replacement",
+  "Oil Change",
+  // Add other services as needed
+];
+
+export default function MaintenancePage() {
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [date, setDate] = useState('');
+  const [notes, setNotes] = useState('');
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  useEffect(() => {
+    // This effect runs only on the client side after the component mounts
+    const service = localStorage.getItem('selectedService');
+    setSelectedService(service);
+
+    if (service) {
+      setDate(localStorage.getItem(`${service}-date`) || '');
+      setNotes(localStorage.getItem(`${service}-notes`) || '');
+    }
+
+    const loadedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+    setTasks(loadedTasks);
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const newTask: Task = { service: selectedService || 'Default Service', date, notes, completed: false };
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
+
+    // Save tasks and current task details to localStorage
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    if (selectedService) {
+      localStorage.setItem(`${selectedService}-date`, date);
+      localStorage.setItem(`${selectedService}-notes`, notes);
+    }
+  };
+
+  const markAsComplete = (index: number) => {
+    const updatedTasks = tasks.map((task, i) => i === index ? { ...task, completed: true } : task);
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1 className="text-2xl font-bold mb-2">Contact Us</h1>
-      <p className="mb-4 text-center">Have questions or want to learn more about our services? Get in touch with us.</p>
-      
-      <form className="w-full max-w-md">
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-            Name
-          </label>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your name" />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-            Email
-          </label>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Your email" />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
-            Message
-          </label>
-          <textarea className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" placeholder="Your message" />
-        </div>
-        <div className="flex items-center justify-between">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-            Send
-          </button>
-        </div>
-      </form>
+    <div>
+      <h1>Maintenance</h1>
+      <ul>
+        {services.map((service, index) => (
+          <li key={index} onClick={() => setSelectedService(service)}>
+            {service}
+          </li>
+        ))}
+      </ul>
+      {selectedService && (
+        <form onSubmit={handleSubmit}>
+          <h2>{selectedService}</h2>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required
+          />
+          <textarea
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="Add notes"
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+      )}
+      <div>
+        <ul>
+          {tasks.map((task, index) => (
+            <li key={index}>
+              {task.service} - {task.date} - {task.notes}
+              {!task.completed && (
+                <button onClick={() => markAsComplete(index)}>Mark as Complete</button>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+      {/* Sections for Vehicle Inspection, Work Order, and Maintenance */}
     </div>
   );
 }
