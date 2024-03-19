@@ -38,7 +38,7 @@ const Footer = () => {
           Invoices
         </Link>
         <Link
-  href="/InvoiceGenerator"
+  href="/"
   className="text-gray-400 hover:text-white transition"
 >
   Invoice Generator
