@@ -1,104 +1,81 @@
+import React, { useState } from 'react';
 
-import React, { useState, useEffect } from 'react';
-
-interface Task {
-  service: string;
+interface MaintenanceEntry {
+  type: string;
   date: string;
   notes: string;
-  completed: boolean;
 }
 
-const services = [
-  "Air Filter Replacement",
-  "Alternator Replacement",
-  "Ball Joint Replacement",
-  "Tire Replacement",
-  "Oil Change",
-  // Add other services as needed
-];
+const ServiceMaintenance: React.FC = () => {
+  const [maintenanceEntries, setMaintenanceEntries] = useState<MaintenanceEntry[]>([]);
+  const [newEntry, setNewEntry] = useState<MaintenanceEntry>({ type: '', date: '', notes: '' });
 
-export default function MaintenancePage() {
-  const [selectedService, setSelectedService] = useState<string | null>(null);
-  const [date, setDate] = useState('');
-  const [notes, setNotes] = useState('');
-  const [tasks, setTasks] = useState<Task[]>([]);
-
-  useEffect(() => {
-    // This effect runs only on the client side after the component mounts
-    const service = localStorage.getItem('selectedService');
-    setSelectedService(service);
-
-    if (service) {
-      setDate(localStorage.getItem(`${service}-date`) || '');
-      setNotes(localStorage.getItem(`${service}-notes`) || '');
-    }
-
-    const loadedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-    setTasks(loadedTasks);
-  }, []);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setNewEntry((prevEntry) => ({ ...prevEntry, [name]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const newTask: Task = { service: selectedService || 'Default Service', date, notes, completed: false };
-    const updatedTasks = [...tasks, newTask];
-    setTasks(updatedTasks);
-
-    // Save tasks and current task details to localStorage
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-    if (selectedService) {
-      localStorage.setItem(`${selectedService}-date`, date);
-      localStorage.setItem(`${selectedService}-notes`, notes);
-    }
-  };
-
-  const markAsComplete = (index: number) => {
-    const updatedTasks = tasks.map((task, i) => i === index ? { ...task, completed: true } : task);
-    setTasks(updatedTasks);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    setMaintenanceEntries((prevEntries) => [...prevEntries, newEntry]);
+    setNewEntry({ type: '', date: '', notes: '' });
   };
 
   return (
     <div>
-      <h1>Maintenance</h1>
-      <ul>
-        {services.map((service, index) => (
-          <li key={index} onClick={() => setSelectedService(service)}>
-            {service}
-          </li>
-        ))}
-      </ul>
-      {selectedService && (
-        <form onSubmit={handleSubmit}>
-          <h2>{selectedService}</h2>
+      <h1>Service Maintenance</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="type">Maintenance Type:</label>
+          <input
+            type="text"
+            id="type"
+            name="type"
+            value={newEntry.type}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="date">Date:</label>
           <input
             type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            id="date"
+            name="date"
+            value={newEntry.date}
+            onChange={handleChange}
             required
           />
+        </div>
+        <div>
+          <label htmlFor="notes">Notes:</label>
           <textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            placeholder="Add notes"
-            required
+            id="notes"
+            name="notes"
+            value={newEntry.notes}
+            onChange={handleChange}
           />
-          <button type="submit">Submit</button>
-        </form>
-      )}
+        </div>
+        <button type="submit">Add Maintenance Entry</button>
+      </form>
       <div>
-        <ul>
-          {tasks.map((task, index) => (
-            <li key={index}>
-              {task.service} - {task.date} - {task.notes}
-              {!task.completed && (
-                <button onClick={() => markAsComplete(index)}>Mark as Complete</button>
-              )}
-            </li>
-          ))}
-        </ul>
+        <h2>Maintenance Entries</h2>
+        {maintenanceEntries.length === 0 ? (
+          <p>No maintenance entries yet.</p>
+        ) : (
+          <ul>
+            {maintenanceEntries.map((entry, index) => (
+              <li key={index}>
+                <h3>{entry.type}</h3>
+                <p>Date: {entry.date}</p>
+                <p>Notes: {entry.notes}</p>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-      {/* Sections for Vehicle Inspection, Work Order, and Maintenance */}
     </div>
   );
-}
+};
+
+export default ServiceMaintenance;
