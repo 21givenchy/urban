@@ -36,7 +36,8 @@ const ServiceMaintenance: React.FC = () => {
       <h1 className="text-3xl font-bold text-center mb-6">Service Maintenance</h1>
       <div className="mb-6">
         <h2 className="text-xl font-bold mb-2">Select a Task:</h2>
-        <div className="grid grid-cols-3 gap-4">
+
+        <div className="flex flex-col grid grid-cols-3 gap-4">
           <button
             className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300"
             onClick={() => handleTaskClick('Oil Change')}
@@ -49,7 +50,14 @@ const ServiceMaintenance: React.FC = () => {
           >
             Air Filter Replacement
           </button>
-          {/* Add more task buttons here */}
+
+          <button
+            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300"
+            onClick={() => handleTaskClick('Other')}
+          >
+            Other
+          </button>
+          
         </div>
       </div>
       <form onSubmit={handleSubmit} className="bg-gray-100 p-6 rounded-lg shadow-md">
