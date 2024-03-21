@@ -14,7 +14,7 @@ export default function Component() {
       <nav className="flex justify-between items-center bg-white border-b py-4">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center">
-            <Image alt="RLS Logo" className="h-10" src="/uss.jpg" />
+             <Image alt="RLS Logo" src="/uss.jpg" width={100} height={100} />
             <div className="ml-10 space-x-4">
               <Link className="text-gray-500 hover:text-gray-900" href="/about">
                 Home
@@ -42,7 +42,7 @@ export default function Component() {
         </div>
       </nav>
       <header className="relative">
-  <Image alt="Our Fleet" className="w-1/2 h-[50vh]  mx-auto" src="pic1.jpeg" />
+  <Image alt="Our Fleet"  width={500} height={300}  src="/pic1.jpeg" />
   <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center">
     <h1 className="text-white text-6xl font-bold">Our Fleet</h1> 
   </div>
