@@ -21,9 +21,37 @@ const ServiceMaintenance: React.FC = () => {
     setNewEntry({ type: '', date: '', notes: '' });
   };
 
+  const handleTaskClick = (task: string) => {
+    setNewEntry((prevEntry) => ({ ...prevEntry, type: task }));
+  };
+
+  const isDatePast = (date: string) => {
+    const today = new Date();
+    const entryDate = new Date(date);
+    return entryDate < today;
+  };
+
   return (
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-6">Service Maintenance</h1>
+      <div className="mb-6">
+        <h2 className="text-xl font-bold mb-2">Select a Task:</h2>
+        <div className="grid grid-cols-3 gap-4">
+          <button
+            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300"
+            onClick={() => handleTaskClick('Oil Change')}
+          >
+            Oil Change
+          </button>
+          <button
+            className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300"
+            onClick={() => handleTaskClick('Air Filter Replacement')}
+          >
+            Air Filter Replacement
+          </button>
+          {/* Add more task buttons here */}
+        </div>
+      </div>
       <form onSubmit={handleSubmit} className="bg-gray-100 p-6 rounded-lg shadow-md">
         <div className="mb-4">
           <label htmlFor="type" className="block font-bold mb-2">
@@ -85,7 +113,9 @@ const ServiceMaintenance: React.FC = () => {
                 className="bg-white p-4 rounded-md shadow-md mb-4"
               >
                 <h3 className="text-lg font-bold">{entry.type}</h3>
-                <p className="text-gray-600">Date: {entry.date}</p>
+                <p className={`text-gray-600 ${isDatePast(entry.date) ? 'text-green-500' : 'text-red-500'}`}>
+                  Date: {entry.date}
+                </p>
                 <p className="text-gray-600">Notes: {entry.notes}</p>
               </li>
             ))}
